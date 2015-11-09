@@ -21,6 +21,9 @@ boolean result = a.flatMap(A::getB)
       .filter(x -> x.isD())
       .isPresent();
 ```
+For more examples of how to use Java 8 optional types, you can refer to this excellent article:
+http://www.nurkiewicz.com/2013/08/optional-in-java-8-cheat-sheet.html
+
 ## Get it
 ```groovy
  repositories {
