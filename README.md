@@ -33,7 +33,7 @@ http://www.nurkiewicz.com/2013/08/optional-in-java-8-cheat-sheet.html
 ```
 ```groovy
  dependencies {
-        compile 'com.github.User:Repo:Tag'
+        compile 'com.github.memoizr:retro-optional:0.1.0'
   }
 ```
 
