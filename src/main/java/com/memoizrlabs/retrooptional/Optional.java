@@ -1,5 +1,7 @@
 package com.memoizrlabs.retrooptional;
 
+import java.io.Serializable;
+
 /**
  * A wrapper class that wraps non-null values that may or may not be there. As this wrapper acts as a
  * monad, it is possible to safely perform chained operations on wrapped values that may or may not exist.
@@ -10,7 +12,7 @@ package com.memoizrlabs.retrooptional;
  *
  * @param <T> the type of the wrapped value.
  */
-public abstract class Optional<T> {
+public abstract class Optional<T> implements Serializable {
 
     private static final Empty<?> EMPTY = new Empty<>();
 
