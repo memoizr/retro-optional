@@ -2,7 +2,6 @@
 A backport of Java8 monad optionals for Java7.
 
 Example:
-
 Let's say we have an instance of a class `A` which can be nullable, and we're interested in getting the
 result of a chain of nested function calls, which eventually will result in a `boolean`. Every intermediate
 step may fail and return a null. To get to the end result without optionals we'd have to do multiple
