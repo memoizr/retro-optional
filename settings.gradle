@@ -1,2 +1,3 @@
-rootProject.name = 'RetroOptional'
+rootProject.name = 'retro-optional'
+rootProject.buildFileName = 'build.gradle.kts'
 

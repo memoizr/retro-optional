@@ -75,6 +75,7 @@ install {
         }
     }
 }
+
 apply plugin: 'com.jfrog.bintray'
 
 Properties properties = new Properties()
