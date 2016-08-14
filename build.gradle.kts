@@ -1,3 +1,4 @@
+
 import com.jfrog.bintray.gradle.BintrayExtension
 import org.apache.xml.serialize.OutputFormat
 import org.apache.xml.serialize.XMLSerializer
@@ -12,7 +13,6 @@ import org.gradle.script.lang.kotlin.*
 import org.w3c.dom.Document
 import org.w3c.dom.Node
 import java.io.StringWriter
-import java.util.*
 import javax.xml.parsers.DocumentBuilderFactory
 
 version = "v0.1.4"
@@ -49,9 +49,6 @@ dependencies {
 val sourceSets by project
 val javadoc by project
 
-val myproperties = Properties()
-myproperties.load(project.rootProject.file("local.properties").inputStream())
-
 val sourcesJar = task<Jar>("sourcesJars") {
     dependsOn + "classes"
     classifier = "sources"
@@ -70,8 +67,8 @@ artifacts {
 }
 
 (findProperty("bintray") as BintrayExtension).apply {
-    user = myproperties["bintray.user"] as String
-    key = myproperties["bintray.apikey"] as String
+    user = System.getenv("BINTRAY_USER")
+    key = System.getenv("BINTRAY_APIKEY")
     setConfigurations("archives")
     pkg.apply {
         repo = "maven"
@@ -85,7 +82,7 @@ artifacts {
             desc = "A backport of Java 8 optional for Java 7"
             gpg.apply {
                 sign = true
-                passphrase = myproperties.getProperty("bintray.gpg.password")
+                passphrase = System.getenv("BINTRAY_CREDENTIAL")
             }
         }
     }
@@ -124,7 +121,7 @@ task("createPom") {
                     xml.append(writer)
                 }
             }
-        }.writeTo("pom.xml")
+        }.writeTo("build/poms/pom-default.xml")
     }
 }
 
