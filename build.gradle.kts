@@ -97,12 +97,10 @@ configure<BintrayExtension> {
     }
 }
 
-val mavenPluginConvention = convention.findPlugin(MavenPluginConvention::class.java)
-
 val documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 task("createPom") {
     doLast {
-        mavenPluginConvention.pom().apply {
+        the<MavenPluginConvention>().pom().apply {
             project.apply {
                 groupId = "com.memoizr"
                 artifactId = "retro-optional"
