@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/memoizr/retro-optional.svg?branch=master)](https://travis-ci.org/memoizr/retro-optional)
+[![codecov](https://codecov.io/gh/memoizr/retro-optional/branch/master/graph/badge.svg)](https://codecov.io/gh/memoizr/retro-optional)
 ## Retro-Optional
 A backport of Java8 monad optionals for Java7.
 
