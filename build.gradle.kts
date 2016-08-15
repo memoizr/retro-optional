@@ -75,7 +75,7 @@ artifacts {
     }
 }
 
-(findProperty("bintray") as BintrayExtension).apply {
+configure<BintrayExtension> {
     user = System.getenv("BINTRAY_USER")
     key = System.getenv("BINTRAY_APIKEY")
     setConfigurations("archives")
