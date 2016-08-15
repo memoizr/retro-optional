@@ -5,8 +5,8 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.artifacts.PublishArtifact
 import org.gradle.api.artifacts.dsl.ArtifactHandler
-import org.gradle.api.internal.tasks.DefaultSourceSetContainer
 import org.gradle.api.plugins.MavenPluginConvention
+import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.jvm.tasks.Jar
 import org.gradle.script.lang.kotlin.*
 import org.gradle.testing.jacoco.tasks.JacocoReport
@@ -49,19 +49,19 @@ dependencies {
     testCompile("nl.jqno.equalsverifier:equalsverifier:2.1.5")
 }
 
-val sourceSets by project
-val javadoc by project
+val sourceSets = the<JavaPluginConvention>().sourceSets
 
 val sourcesJar = task<Jar>("sourcesJars") {
     dependsOn + "classes"
     classifier = "sources"
-    from((sourceSets as DefaultSourceSetContainer).getByName("main").allSource)
+    from(sourceSets.getByName("main").allSource)
 }
 
+val javadoc = tasks.getByName("javadoc") as Javadoc
 val javadocJar = task<Jar>("javadocJar") {
     dependsOn + "javadoc"
     classifier = "javadoc"
-    from(getTasksByName("javadoc", false).first().property("destinationDir"))
+    from(javadoc.destinationDir)
 }
 
 artifacts {
@@ -75,7 +75,7 @@ artifacts {
     }
 }
 
-(findProperty("bintray") as BintrayExtension).apply {
+configure<BintrayExtension> {
     user = System.getenv("BINTRAY_USER")
     key = System.getenv("BINTRAY_APIKEY")
     setConfigurations("archives")
@@ -97,12 +97,10 @@ artifacts {
     }
 }
 
-val mavenPluginConvention = convention.findPlugin(MavenPluginConvention::class.java)
-
 val documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 task("createPom") {
     doLast {
-        mavenPluginConvention.pom().apply {
+        the<MavenPluginConvention>().pom().apply {
             project.apply {
                 groupId = "com.memoizr"
                 artifactId = "retro-optional"
