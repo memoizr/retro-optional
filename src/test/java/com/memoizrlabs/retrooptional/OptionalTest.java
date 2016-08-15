@@ -267,6 +267,16 @@ public class OptionalTest {
     }
 
     @Test
+    public void equals_always_returnsFalseIfNullOrDifferentInstance() throws Exception {
+        A value = new A();
+        assertFalse(Optional.of(value)
+                .equals(null));
+
+        assertFalse(Optional.of(value)
+                .equals(new Object()));
+    }
+
+    @Test
     public void hashcode_withValue_returnsValuesHashcode() throws Exception {
         A value = new A();
         assertEquals(value.hashCode(), Optional.of(value).hashCode());

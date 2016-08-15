@@ -10,6 +10,7 @@ import org.gradle.api.internal.tasks.DefaultSourceSetContainer
 import org.gradle.api.plugins.MavenPluginConvention
 import org.gradle.jvm.tasks.Jar
 import org.gradle.script.lang.kotlin.*
+import org.gradle.testing.jacoco.tasks.JacocoReport
 import org.w3c.dom.Document
 import org.w3c.dom.Node
 import java.io.StringWriter
@@ -36,8 +37,10 @@ repositories {
 apply {
     plugin("java")
     plugin("maven")
+    plugin("jacoco")
     plugin("com.jfrog.bintray")
 }
+
 
 setProperty("targetCompatibility", 1.7)
 setProperty("sourceCompatibility", 1.7)
@@ -64,6 +67,12 @@ val javadocJar = task<Jar>("javadocJar") {
 artifacts {
     artifacts.add("archives", sourcesJar)
     artifacts.add("archives", javadocJar)
+}
+
+(getTasksByName("jacocoTestReport", false).first() as JacocoReport).apply {
+    reports {
+        it.xml.isEnabled = true
+    }
 }
 
 (findProperty("bintray") as BintrayExtension).apply {
