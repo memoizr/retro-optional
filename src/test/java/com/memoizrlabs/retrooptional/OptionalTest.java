@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertFalse;
@@ -267,19 +269,19 @@ public class OptionalTest {
     }
 
     @Test
-    public void equals_always_returnsFalseIfNullOrDifferentInstance() throws Exception {
-        A value = new A();
-        assertFalse(Optional.of(value)
-                .equals(null));
-
-        assertFalse(Optional.of(value)
-                .equals(new Object()));
-    }
-
-    @Test
     public void hashcode_withValue_returnsValuesHashcode() throws Exception {
         A value = new A();
         assertEquals(value.hashCode(), Optional.of(value).hashCode());
+    }
+
+    @Test
+    public void equalsAndHashcode_withValue_fulfilsStandardContract() throws Exception {
+        EqualsVerifier.forClass(Optional.of(new A()).getClass()).verify();
+    }
+
+    @Test
+    public void equals_withAnotherEmpty_isAlwaysTrue() throws Exception {
+        assertEquals(Optional.of(null), Optional.empty());
     }
 
     private static final class A {

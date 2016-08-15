@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/memoizr/retro-optional.svg?branch=master)](https://travis-ci.org/memoizr/retro-optional)
 [![codecov](https://codecov.io/gh/memoizr/retro-optional/branch/master/graph/badge.svg)](https://codecov.io/gh/memoizr/retro-optional)
+[![](https://jitpack.io/v/memoizr/retro-optional.svg)](https://jitpack.io/#memoizr/retro-optional)
+[![GitHub license](https://img.shields.io/github/license/kotlintest/kotlintest.svg)](http://www.apache.org/licenses/LICENSE-2.0.html) 
 ## Retro-Optional
 A backport of Java8 monad optionals for Java7.
 

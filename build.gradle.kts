@@ -1,4 +1,3 @@
-
 import com.jfrog.bintray.gradle.BintrayExtension
 import org.apache.xml.serialize.OutputFormat
 import org.apache.xml.serialize.XMLSerializer
@@ -47,6 +46,7 @@ setProperty("sourceCompatibility", 1.7)
 
 dependencies {
     testCompile("junit:junit:4.12")
+    testCompile("nl.jqno.equalsverifier:equalsverifier:2.1.5")
 }
 
 val sourceSets by project

@@ -65,18 +65,21 @@ final class Some<T> extends Optional<T> {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
-        if (!(object instanceof Some)) return false;
+        Some<?> some = (Some<?>) o;
 
-        final Some some = (Some) object;
-
-        return value.equals(some.value);
+        return value != null ? value.equals(some.value) : some.value == null;
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return value != null ? value.hashCode() : 0;
     }
 }
