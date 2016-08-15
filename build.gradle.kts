@@ -6,6 +6,7 @@ import org.gradle.api.Task
 import org.gradle.api.artifacts.PublishArtifact
 import org.gradle.api.artifacts.dsl.ArtifactHandler
 import org.gradle.api.plugins.MavenPluginConvention
+import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.jvm.tasks.Jar
 import org.gradle.script.lang.kotlin.*
 import org.gradle.testing.jacoco.tasks.JacocoReport
@@ -48,7 +49,6 @@ dependencies {
     testCompile("nl.jqno.equalsverifier:equalsverifier:2.1.5")
 }
 
-val javadoc by project
 val sourceSets = the<JavaPluginConvention>().sourceSets
 
 val sourcesJar = task<Jar>("sourcesJars") {
@@ -57,10 +57,11 @@ val sourcesJar = task<Jar>("sourcesJars") {
     from(sourceSets.getByName("main").allSource)
 }
 
+val javadoc = tasks.getByName("javadoc") as Javadoc
 val javadocJar = task<Jar>("javadocJar") {
     dependsOn + "javadoc"
     classifier = "javadoc"
-    from(getTasksByName("javadoc", false).first().property("destinationDir"))
+    from(javadoc.destinationDir)
 }
 
 artifacts {
