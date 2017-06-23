@@ -36,7 +36,7 @@ http://www.nurkiewicz.com/2013/08/optional-in-java-8-cheat-sheet.html
 ```
 ```groovy
  dependencies {
-        compile 'com.github.memoizr:retro-optional:0.1.0'
+        compile 'com.github.memoizr:retro-optional:0.2.0'
   }
 ```
 
